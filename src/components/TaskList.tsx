@@ -19,16 +19,13 @@ export function TaskList() {
 
     if (!newTaskTitle) return
 
-    const newTasks: Task[] = [
-      {
-        id: Math.random(),
-        title: newTaskTitle,
-        isComplete: false,
-      },
-      ...tasks
-    ];
+    const newTasks: Task = {
+      id: Math.random(),
+      title: newTaskTitle,
+      isComplete: false,
+    }
 
-    setTasks(newTasks)
+    setTasks(oldValue => [...oldValue, newTasks])
     setNewTaskTitle('')
   }
 
@@ -36,7 +33,7 @@ export function TaskList() {
     // Altere entre `true` ou `false` o campo `isComplete` de uma task com dado ID
 
     const allTasks = tasks.map(task => {
-      if(task.id === id) {
+      if (task.id === id) {
         return {
           ...task,
           isComplete: !task.isComplete
